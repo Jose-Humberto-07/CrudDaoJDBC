@@ -3,8 +3,8 @@ package application;
 
 
 
-import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
@@ -15,29 +15,7 @@ public class Program {
 
 	public static void main(String[] args) {
 		
-	/*
-	 * 	Connection conn = null;
-		Statement st = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = DB.getConnection();
-			st = conn.createStatement();
-			rs = st.executeQuery("select * from seller");
-			
-			while (rs.next()) {
-				System.out.println(rs.getInt("Id") + ", " + rs.getString("Name") + ", " + rs.getString("Email") + ", " + rs.getString("BirthDate") + ", " + rs.getString("BaseSalary") + ", " + rs.getString("DepartmentId"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		finally {
-			DB.closeResultSet(rs);
-			DB.closeStatement(st);
-			DB.closeConnection();
-		}
-	 * */
+		Scanner sc = new Scanner(System.in);
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
@@ -71,10 +49,12 @@ public class Program {
 		System.out.println("######################################");
 		System.out.println();
 		
-		System.out.println("===== TEST 4: seller insert =====");
+		/*
+		 * System.out.println("===== TEST 4: seller insert =====");
 		Seller newSeller = new Seller(null, "Cristiano Ronaldo", "Cristiano_Ronaldo@gmail.com",new Date(), 4000.0, department);
 		sellerDao.insert(newSeller);
 		System.out.println("Inserted! New Id = " + newSeller.getId());
+		 * */
 		
 		System.out.println();
 		System.out.println("######################################");
@@ -85,6 +65,18 @@ public class Program {
 		seller.setName("DI Maria");
 		sellerDao.update(seller);
 		System.out.println("Update Completed");
+		
+		System.out.println();
+		System.out.println("######################################");
+		System.out.println();
+		
+		System.out.println("===== TEST 6: seller delete =====");
+		System.out.println("Enter id for delete test: ");
+		int id = sc.nextInt();
+		sellerDao.deleteById(id);
+		System.out.println("Delete completed");
+		
+		sc.close();
 	}
 	
 	
